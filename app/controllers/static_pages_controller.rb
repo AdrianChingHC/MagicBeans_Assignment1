@@ -1,4 +1,7 @@
 class StaticPagesController < ApplicationController
+  
+  skip_before_filter :require_login
+  
   def index
   end
 
@@ -7,4 +10,7 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+  
+  
+
 end

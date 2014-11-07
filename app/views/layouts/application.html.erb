@@ -8,9 +8,6 @@
 </head>
 
 <body>
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: name %>
-<% end%>
 
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
@@ -27,6 +24,13 @@
       <ul class="nav nav-pills navbar-right" role="tablist">
       <li role="presentation" <%= current_page?(root_path) ? "class=active" : ""%> ><%= link_to 'Home', root_path %></li>
         <li role="presentation" <%= current_page?(about_path) ? "class=active" : ""%> ><%= link_to 'About', about_path %></li>
+        <li role="presentation" <%= current_page?(users_path) ? "class=active" : ""%> >
+        <% if user_logged_in? %>
+          <%= link_to 'Profiles', users_path %>
+          <% else %>
+          <%= nil %>
+          <% end %>
+          </li>
         <li role="presentation" <%= current_page?(contact_path) ? "class=active" : ""%> ><%= link_to 'Contact', contact_path %></li>
         <li role="presentation" <%= current_page?(sign_in_path) ? "class=active" : ""%> ><% if user_logged_in? %>
           <%= link_to 'Sign Out', sign_out_path(current_user.id), method: :delete %>
@@ -42,6 +46,9 @@
 
 
 <div class="container-fluid">
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: name %>
+<% end %>
 <%= yield %>
 </div>
 </body>
