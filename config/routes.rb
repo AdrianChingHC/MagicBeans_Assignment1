@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  root 'static_pages#index'
+
+  get 'about' => 'static_pages#about'
+
+  get 'contact' => 'static_pages#contact'
+
   resources :users
   get 'sign_up' => 'users#new'
   get 'sign_in' => 'sessions#new'
