@@ -4,24 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 before_filter :require_login
+
+include SessionsHelper
  
 private 
 
-  def user_logged_in?
-    if session[:user_id]
-      true
-    else
-      false
-    end
-  end
-  
-  def current_user
-      if user_logged_in?
-        User.find(session[:user_id])
-      else
-        nil
-      end
-  end
     
   def require_login 
      unless current_user 
