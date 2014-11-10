@@ -1,21 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
-  skip_before_filter :require_login, only: [:new]
+  skip_before_filter :require_login, only: [:new, :create]
 
-#   before_filter :require_login
- 
-# private 
-    
-#     def require_login 
-#       unless current_user 
-#       redirect_to login_url 
-#       end 
-#     end 
-    
-#     def current_user
-      
-#     end
 
   # GET /users
   # GET /users.json
@@ -46,10 +33,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        # UserMailer.welcome_email(@user).deliver
+        UserMailer.welcome_email(@user).deliver
         format.html { redirect_to user_path(id: @user.id), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
+        # flash[:notice] = @user.errors.full_messages.join()
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

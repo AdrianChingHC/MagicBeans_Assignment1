@@ -12,6 +12,7 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
 #Use Bootstrap-Sass
 gem 'bootstrap-sass', '~>3.3.0'
 # Use SCSS for stylesheets
