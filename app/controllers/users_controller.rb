@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
   skip_before_filter :require_login, only: [:new, :create]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, except: [:show, :new, :create] # require the user to be admin filter
 
 
   # GET /users
@@ -30,16 +30,23 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    @user.acl = 10;
     respond_to do |format|
       if @user.save
         UserMailer.welcome_email(@user).deliver
-        format.html { redirect_to user_path(id: @user.id), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        
+        if is_admin?
+          redirect_to user_path(id: @user.id), success: 'successfully added user!'
+        else
+          redirect_to sign_in_path, notice: 'Thank you for signing up.'
+        # format.html { redirect_to sign_in_path, notice: 'User was successfully created.' }
+        # format.json { render :show, status: :created, location: @user }
+        end
+      
       else
-       
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render :new
+        # format.html { render :new }
+        # format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

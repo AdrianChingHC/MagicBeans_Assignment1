@@ -14,4 +14,12 @@ module SessionsHelper
         nil
       end
     end
+    
+    def is_admin?
+        if user_logged_in? && current_user.acl == 1
+           true
+        else
+           false
+        end
+    end
 end
