@@ -40,6 +40,12 @@
           <%= link_to 'Sign In', sign_in_path %>
           <% end %>
         </li>
+        <li role="presentation" <%= current_page?(sign_up_path) ? "class=active" : ""%> ><% if user_logged_in? %>
+          <% nil %>
+          <% else %>
+          <%= link_to 'Register', sign_up_path %>
+          <% end %>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

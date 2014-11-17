@@ -9,6 +9,7 @@
 user = User.new
 user.name = 'admin'
 user.email = 'admin@whattimeisit.com'
-user.password = 'adrianchc'
+user.password = 'password'
 user.acl = '1'
+user.time_zone = '(GMT+08:00) Kuala Lumpur'
 user.save!

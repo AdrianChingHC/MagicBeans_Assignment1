@@ -11,9 +11,9 @@
   <%= @user.email %>
 </p>
 
-<!--<div class="myclock">-->
-<canvas id="myid" class="CoolClock::100:noSeconds:<%=Time.zone.formatted_offset%>" style="height: 300px; width: 300px;"></canvas>
-<!--</div>-->
+
+<canvas id="myid" class="CoolClock::100::<%=Time.zone.formatted_offset%>" style="height: 300px; width: 300px;"></canvas>
+
 <div class="time-rect-container">
    <%= render 'time_portion' %>
  </div>
