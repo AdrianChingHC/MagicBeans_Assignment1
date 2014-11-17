@@ -6,10 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-user = User.new
-user.name = 'admin'
-user.email = 'admin@whattimeisit.com'
-user.password = 'password'
-user.acl = '1'
-user.time_zone = '(GMT+08:00) Kuala Lumpur'
-user.save!
+User.create(user.name = 'admin', user.email = 'admin@whattimeisit.com', user.password = 'secretpass', user.acl = '1', user.time_zone = 'Kuala Lumpur')
+
+
+
+
+
