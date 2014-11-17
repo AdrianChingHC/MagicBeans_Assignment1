@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, except: [:show, :new, :create] # require the user to be admin filter
+  before_action :require_admin, except: [:show, :new, :create, :edit, :update] # require the user to be admin filter
 
 
   # GET /users
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.acl = 10;
-    respond_to do |format|
+    # respond_to do |format|
       if @user.save
         UserMailer.welcome_email(@user).deliver
         
@@ -48,12 +48,17 @@ class UsersController < ApplicationController
         # format.html { render :new }
         # format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    if params[:user][:password].blank? && params[:user][:password_confirmation]
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+    
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_path(id: @user.id), notice: 'User was successfully updated.' }
@@ -83,7 +88,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :time_zone)
     end
     
   

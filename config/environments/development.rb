@@ -45,4 +45,6 @@ config.action_mailer.default_url_options = { host: 'whattimeisit.com' }
       :port => '2525',
       :authentication => :cram_md5
     }
+    
+    config.time_zone = "Pacific Time (US & Canada)"
 end
