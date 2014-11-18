@@ -13,17 +13,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if @user = User.find(params[:id])
-      redirect_to user_path(current_user.id)
-    else
-      if user_logged_in?
-        if is_admin?
-          redirect_to users_path
-        else
-          redirect_to user_path(current_user.id)
-        end
-      end
-    end
+    @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    redirect_to(root_url, :notice => 'Record not found')
   end
 
   # GET /users/new
