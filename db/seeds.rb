@@ -6,9 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(user.name = 'admin', user.email = 'admin@whattimeisit.com', user.password = 'secretpass', user.acl = '1', user.time_zone = 'Kuala Lumpur')
-
-
-
-
-
+user = User.new
+user.name = 'admin'
+user.email = 'admin@whattimeisit-adrianchc.herokuapp.com'
+user.password = 'secretpass'
+user.acl = '1'
+user.time_zone = 'Kuala Lumpur'
+user.save!
